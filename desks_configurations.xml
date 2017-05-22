@@ -1,0 +1,253 @@
+<!-- 
+    Desks configuration file
+
+    Defines names of the desks as they apprear in RunCom (names are also used
+        for persistent file names - hence cannot inlude characters
+        like /, \, etc).
+    Defines exact checklist file names which are looked for by the CheckList
+        application upon a corresponding action / request:
+        
+        signInCheckListFileName - checklist when declaring system ready
+
+        dqCheckListFileName - checklist when declaring that system has checked
+            its data quality
+            
+        injectionCheckListFileName - checklist to fulfil after Shift Leader
+            issues an 'are you ready for injection' request
+
+        stableBeamCheckListFileName - checklist to fulfil after Shift Leader
+            issues an 'are you ready for stable beam operation' request
+
+        startRunCheckListFileName - checklist to fulfil after Shift Leader
+            issues an 'are you ready for start of the run' request
+            
+        only systems which declared their overall state 'ready' are presented
+            with request checklists
+
+        if a particular request (checklist) is not applicable to a given desk,
+            it should set a corresponding request ignore flag here
+
+    The order or desks definitions is kept for order of tabpanes in RunCom.
+
+-->
+
+
+<object-stream>
+
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>Shift Leader</deskName>
+    <signInCheckListFileName>signin-ShiftLeader.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-ShiftLeader.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-ShiftLeader.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-ShiftLeader.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-ShiftLeader.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>T.I. and SLIMOS</deskName>
+    <signInCheckListFileName>signin-SLIMOS.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-SLIMOS.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-SLIMOS.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-SLIMOS.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-SLIMOS.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>Run Control</deskName>
+    <signInCheckListFileName>signin-RunControl.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-RunControl.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-RunControl.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-RunControl.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-RunControl.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>DQ Monitor</deskName>
+    <signInCheckListFileName>signin-DQMonitor.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-DQMonitor.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-DQMonitor.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-DQMonitor.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-DQMonitor.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>FD-Lumi</deskName>
+    <signInCheckListFileName>signin-fd_lumi.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-fd_lumi.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-fd_lumi.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-fd_lumi.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-fd_lumi.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>MDT</deskName>
+    <signInCheckListFileName>signin-MDT.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-MDT.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-MDT.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-MDT.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-MDT.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>RPC</deskName>
+    <signInCheckListFileName>signin-RPC.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-RPC.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-RPC.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-RPC.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-RPC.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>TGC</deskName>
+    <signInCheckListFileName>signin-TGC.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-TGC.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-TGC.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-TGC.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-TGC.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>CSC</deskName>
+    <signInCheckListFileName>signin-CSC.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-CSC.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-CSC.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-CSC.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-CSC.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>LAr</deskName>
+    <signInCheckListFileName>signin-LAr.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-LAr.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-LAr.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-LAr.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-LAr.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>Tile</deskName>
+    <signInCheckListFileName>signin-Tile.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-Tile.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-Tile.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-Tile.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-Tile.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>TRT</deskName>
+    <signInCheckListFileName>signin-TRT.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-TRT.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-TRT.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-TRT.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-TRT.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>SCT</deskName>
+    <signInCheckListFileName>signin-SCT.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-SCT.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-SCT.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-SCT.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-SCT.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>Pixel</deskName>
+    <signInCheckListFileName>signin-Pixel.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-Pixel.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-Pixel.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-Pixel.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-Pixel.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>Trigger</deskName>
+    <signInCheckListFileName>signin-Trigger.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-Trigger.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-Trigger.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-Trigger.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-Trigger.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>LVL1</deskName>
+    <signInCheckListFileName>signin-LVL1.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-LVL1.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-LVL1.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-LVL1.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-LVL1.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>DAQ-HLT</deskName>
+    <signInCheckListFileName>signin-DAQ-HLT.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-DAQ-HLT.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-DAQ-HLT.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-DAQ-HLT.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-DAQ-HLT.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>true</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+  
+  <runcom.deskconfig.DeskConfiguration>
+    <deskName>DCS</deskName>
+    <signInCheckListFileName>signin-DCS.xml</signInCheckListFileName>
+    <dqCheckListFileName>DQcheck-DCS.xml</dqCheckListFileName>
+    <injectionCheckListFileName>injection-DCS.xml</injectionCheckListFileName>
+    <stableBeamCheckListFileName>stablebeam-DCS.xml</stableBeamCheckListFileName>
+    <startRunCheckListFileName>startrun-DCS.xml</startRunCheckListFileName>
+    <ignoreInjectionRequest>false</ignoreInjectionRequest>
+    <ignoreStableBeamRequest>false</ignoreStableBeamRequest>
+    <ignoreStartRunRequest>false</ignoreStartRunRequest>
+  </runcom.deskconfig.DeskConfiguration>
+
+</object-stream>

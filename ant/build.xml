@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+
+<!-- CheckList build.xml file for ANT, local usage (ant installed locally) -->
+<!-- author: Zdenek Maxa -->
+
+<!-- basedir attribute to be adjusted - target build directory - - - - -  -->
+<project name="RunCom" default="usage" basedir="..">
+
+    <!-- begin properties - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- read in overriden properties from ant.properties file  - - - - - -->
+    <property file="ant.properties"/>
+    <property name="appName" value="RunCom"/>
+
+    <property name ="classpath"
+              value = "lib/log4j-1.2.15.jar
+                       lib/mylogger.jar
+                       lib/activemq-all-5.1.0.jar
+                       lib/commons-cli-1.0.jar
+                       lib/xpp3_min-1.1.4c.jar
+                       lib/xstream-1.3.1.jar
+                       ../CheckList/checklist.jar"/>
+
+    <!-- directories - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <property name="src" value="src"/>
+    <property name="lib" value="lib"/>
+
+    <property name="classes" value="classes"/>
+
+    <!-- RunCom - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <property name="runcom.jar"           value="runcom.jar"/>
+    <property name="runcom.main.class"    value="runcom.RunCom"/>
+
+
+
+    <!-- ===============================================================  -->
+    
+    <!-- targets begin  - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <!-- ===============================================================  -->
+
+
+    
+    <!-- compile target   - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <target name="compile" description="Compiles all source files">
+
+        <echo>
+            Executing target: compile
+        </echo>
+
+        <mkdir dir="${classes}"/>
+
+        <javac srcdir="${src}" destdir="${classes}" deprecation="on">
+            <!-- <compilerarg value="-Xlint:unchecked"/> -->
+            <include name="**/*.java"/>
+            <!-- */ one directory deep (runcom package name) -->
+            <classpath>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+
+
+
+    <!-- jar target - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <target name="jar" description="Create jar file for deployment">
+
+        <echo>
+            Executing target: jar
+        </echo>
+
+        <!-- jar - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+        <jar destfile="${runcom.jar}">
+            <fileset dir="${classes}">
+                <include name="**/*.class"/> <!-- */ directory runcom -->
+            </fileset>
+            <manifest>
+                <attribute name="Built-By"   value="${user.name}"/>
+                <attribute name="Main-Class" value="${runcom.main.class}"/>
+                <attribute name="Class-Path" value="${classpath}"/>
+                <attribute name="Implementation-Title" value="RunCom"/>
+            </manifest>
+        </jar>
+    </target>
+
+        
+    <!-- clean target  - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <target name="clean" description="Erase *.class generated files">
+        <echo>
+            Executing target: clean
+        </echo>
+        <delete dir="${classes}"/>
+    </target>
+
+
+
+    <!-- runcom target  - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <target name="runcom" depends="compile, jar, clean"
+                       description="Copy runtime files, build and clean up"/>
+
+
+
+    <!-- broker target  - - - - - - - - - - - - - - - - - - - - - - -  -  -->
+    <target name="broker" description="Compiles and creates broker JAR file">
+        <echo>
+            Executing target: broker
+        </echo>
+        
+        <mkdir dir="${classes}"/>
+
+        <javac srcdir="${src}" destdir="${classes}" deprecation="on">
+            <!-- <compilerarg value="-Xlint:unchecked"/> -->
+            <include name="runcom/activemqcommunication/broker/*.java"/>
+            <include name="runcom/activemqcommunication/*Message.java"/>
+            <include name="runcom/deskconfig/*.java"/>
+            <classpath>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+        
+        <jar destfile="broker.jar">
+            <fileset dir="${classes}">
+                <include name="runcom/activemqcommunication/broker/*.class"/>
+                <include name="runcom/activemqcommunication/*Message.class"/>
+                <include name="runcom/deskconfig/*.class"/>
+            </fileset>
+            <manifest>
+                <attribute name="Built-By"   value="${user.name}"/>
+                <attribute name="Main-Class" 
+                           value="runcom/activemqcommunication/broker/Broker"/>
+                <attribute name="Class-Path" value="${classpath}"/>
+                <attribute name="Implementation-Title" value="Broker"/>
+            </manifest>
+        </jar>
+
+        <delete dir="${classes}"/>
+
+    </target>
+
+	
+    <!-- clisubmitter target  - - - - - - - - - - - - - - - - - - - - - - -  -  -->
+    <target name="clisubmitter" description="Compiles and creates clisubmitter JAR file">
+        <echo>
+            Executing target: clisubmitter
+        </echo>
+        
+        <mkdir dir="${classes}"/>
+
+        <javac srcdir="${src}" destdir="${classes}" deprecation="on">
+            <!-- <compilerarg value="-Xlint:unchecked"/> -->
+            <include name="runcom/WhiteBoardCommandLineSubmitter.java"/>
+            <classpath>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+        
+        <jar destfile="white_board_command_line_submitter.jar">
+            <fileset dir="${classes}">
+                <include name="runcom/*.class"/>
+                <include name="runcom/activemqcommunication/*.class"/>
+            </fileset>
+            <manifest>
+                <attribute name="Built-By"   value="${user.name}"/>
+                <attribute name="Main-Class" 
+                           value="runcom/WhiteBoardCommandLineSubmitter"/>
+                <attribute name="Class-Path" value="${classpath}"/>
+                <attribute name="Implementation-Title" value="Broker"/>
+            </manifest>
+        </jar>
+
+        <delete dir="${classes}"/>
+
+    </target>
+
+
+	
+    <!-- usage target - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <target name="usage" description="Prints usage hint">
+        <echo level="info" message="Usage:"/>
+        <echo>ant [usage|runcom|broker|clisubmitter]</echo>
+    </target>
+
+
+
+    <!-- help  target - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <target name="help" depends="usage" description="Prints usage hint"/>
+
+</project>

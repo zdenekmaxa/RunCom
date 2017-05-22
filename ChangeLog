@@ -1,0 +1,1224 @@
+
+-----------------------------------------------------------------------------
+2009-11-30 Zdenek Maxa
+	* Tagging RunCom-00-01-11
+
+	* Reading (deserializing) persistent XML data - method getXmlBlock()
+	  reimplemented (using blank lines as XML blocks delimiter removed
+	  completely - blank lines appearing in the WhiteBoardMessages (user
+	  input) broke parsing
+	M src/runcom/activemqcommunication/broker/PersistentRepository.java
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+	M white_board_command_line_submitter.jar
+
+-----------------------------------------------------------------------------
+2009-11-09 Zdenek Maxa
+	* Tagging RunCom-00-01-10
+
+-----------------------------------------------------------------------------
+2009-11-09 Zdenek Maxa
+	* Tagging RunCom-00-01-07
+
+	* New feature - non interactive command-line based application for
+	  submitting white board features updates
+	* Had to broke Receiver, Sender, etc dependencies on RunCom, a bit
+	  of refactoring done
+	A src/runcom/WhiteBoardCommandLineSubmitter.java
+	A white_board_command_line_submitter.sh
+	M src/runcom/RunCom.java 
+	M src/runcom/RunComGUI.java
+	M src/runcom/activemqcommunication/Sender.java
+	M src/runcom/activemqcommunication/StartupSynchronizer.java
+	M src/runcom/activemqcommunication/Receiver.java
+	M ant/build.xml
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+	A white_board_command_line_submitter.jar
+
+-----------------------------------------------------------------------------
+2009-07-06 Zdenek Maxa
+	* Tagging RunCom-00-01-06
+
+	* Removing auto resing functinality from WhiteBoard window - it's still
+	  resiable, scrollable, leave it up to the user to adjust actual window
+	  size
+	M src/runcom/WhiteBoardWindow.java
+
+	* Issues with Notification dialog (focus, getting it to front and
+	  impossible to log into ACR machine (crss login dialog) - issues not
+	  reproducible on an ACR machine - combining locking the screen with
+	  notification dialog (DQ checklist pop-up) - all works all right even
+	  with the previous version but removing initial .toFront() anyway ...
+	M src/runcom/NotificationDialog.java
+
+	* Width of the main GUI increased
+	M src/runcom/RunComGUI.java
+
+	* TODO
+
+	* JAR build file updated
+	M runcom.jar
+
+-----------------------------------------------------------------------------
+2009-06-10 Zdenek Maxa
+	* Tagging RunCom-00-01-05
+
+	* Addional logging of whiteboard message saving, passing ; check when
+	  there is no whiteboard message
+	M src/runcom/activemqcommunication/broker/PersistentRepository.java
+	M src/runcom/activemqcommunication/StartupSynchronizer.java
+	
+	* Width of the GUI increased
+	M src/runcom/RunComGUI.java
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2009-05-19 Zdenek Maxa
+	* Tagging RunCom-00-01-04
+
+	* Adjusted window width
+	M src/runcom/RunComGUI.java 
+
+	* JAR build file updated
+	M runcom.jar
+
+-----------------------------------------------------------------------------
+2009-04-08 Zdenek Maxa
+	* Tagging RunCom-00-01-03
+
+	* If no-one fulfills or just closes DQ automatic checklists, there may
+	  appear a lot of those if system is left in ready with nobody present ...
+	  fix - don't pop up another checklist if there is already one shown
+	  Uses flag in DQStatusWatcher class, reset from the NotificationDialog
+	  which is not the best design-wise, but since RunCom and CheckList are
+	  two separated applications ...
+	M src/runcom/DQStatusWatcher.java
+	M src/runcom/NotificationDialog.java
+
+	* Minor, notes added
+	M statistics_generator.py
+	M pyactivemq_broker_browser.py
+
+	* SLIMOS renamed to 'T.I. and SLIMOS'
+	M runcom.sh
+	M desks_configurations.xml
+
+	* JAR build file updated
+	M runcom.jar
+
+-----------------------------------------------------------------------------
+2009-03-26 Zdenek Maxa
+	* Tagging RunCom-00-01-02
+
+	* Correction
+	M html_legend.html
+
+-----------------------------------------------------------------------------
+2009-03-22 Zdenek Maxa
+	* Tagging RunCom-00-01-01
+
+	* Python pyactivemq JMS connector to broker (possible dynamic scripting
+	  web HTML overview solution)
+	A pyactivemq_broker_browser.py
+
+	* Generating statistics based on broker XML (persistent) data
+	A statistics_generator.py
+	A statistics_runcom_example.png (just example for reference)
+
+	* HTML static status overview files
+	A html_overview.html - just example for reference, is currently
+		generated automatically by the broker
+	A html_main.html - will be used in some page into which html_overview.html
+		will be included
+	A html_legend.html - dtto
+
+	* Minor
+	M src/runcom/activemqcommunication/broker/BrokerReceiver.java
+	M src/runcom/activemqcommunication/broker/Broker.java
+	M desks_configurations.xml
+
+	* JAR build file updated
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2009-03-01 Zdenek Maxa
+	* Tagging RunCom-00-01-00
+	
+	* Modified
+	* M TODO
+
+-----------------------------------------------------------------------------
+2009-03-01 Zdenek Maxa
+	* Tagging RunCom-00-00-48
+
+	* HTML file path for all desks status overview made CLI configurable at
+	  broker
+	* HTMLOverviewWriter optimisation
+	M src/runcom/activemqcommunication/broker/Broker.java
+	M src/runcom/activemqcommunication/broker/PersistentRepository.java
+	M src/runcom/activemqcommunication/broker/HTMLOverviewWriter.java
+
+	* Timeout for receiving synchronization update at application start up
+	  increased to 6 seconds
+	M src/runcom/activemqcommunication/StartupSynchronizer.java
+
+	* Modified
+	M TODO
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2009-02-19 Zdenek Maxa
+	* Tagging RunCom-00-00-47
+
+	* HTML status overview page generating
+	* Created a new package runcom.deskconfig user both by the main RunCom
+	  as well as the the broker
+	M ant/build.xml
+	M src/runcom/AuthenticationDialog.java
+	M src/runcom/DQStatusCheckBoxListener.java
+	M src/runcom/DQStatusWatcher.java
+	M src/runcom/DeskPanel.java
+	M src/runcom/RunCom.java
+	M src/runcom/RunComGUI.java
+	M src/runcom/activemqcommunication/broker/HTMLOverviewWriter.java
+	R src/runcom/DeskConfigurationProcessor.java
+	A src/runcom/deskconfig/DeskConfigurationProcessor.java
+	A src/runcom/deskconfig/DeskConfiguration.java
+	
+	* Minor
+	M src/runcom/RunComGUI.java
+	M desks_configurations.xml
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2009-02-19 Zdenek Maxa
+	* Tagging RunCom-00-00-46
+
+	* desks_configurations.xml implemented - XML config file has configuration
+	  data such as desk name, checklist file names and request ignore flags
+	  associated with each desk. RunCom/CheckList no longer depends on
+	  checklist titles (defined in the XML file as title attribute), it is
+	  completely independent, only checklist file name in this configuration
+	  XML file matters. However checklist prefixes are used in RunCom to
+	  distinguish action from CheckList, prefixes must be set properly.
+	  desks_configurations.xml is replacement of desks.txt
+	* Ignore (mask) flags for request types implemented (e.g. injection
+	  request is said not to be relevant for DAQ-HLT desk at all)
+	R desks.txt
+	A desks_configurations.xml
+	M src/runcom/RunCom.java
+	M src/runcom/RunComGUI.java
+	A src/runcom/DeskConfigurationProcessor.java
+	M src/runcom/AuthenticationDialog.java
+	M src/runcom/CheckListCaller.java
+	M src/runcom/DQStatusCheckBoxListener.java
+	M src/runcom/DQStatusWatcher.java
+	M src/runcom/DeskPanel.java
+	M src/runcom/RequestPanelSupervisor.java
+
+	* Using xstream aliases for class names in XML serialised data
+	* Everytime the Broker receives an status update for any desk, it writes
+	  an HTML file with overall list of all desks and states, only started
+	M src/runcom/activemqcommunication/DeskDataMessage.java
+	M src/runcom/activemqcommunication/RequestMessage.java
+	M src/runcom/activemqcommunication/TextMessage.java
+	M src/runcom/activemqcommunication/WhiteBoardMessage.java
+	M src/runcom/activemqcommunication/broker/PersistentRepository.java
+	A src/runcom/activemqcommunication/broker/HTMLOverviewWriter.java
+
+	* Minor (code comment, etc)
+	M src/runcom/DeskData.java
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2009-02-16 Zdenek Maxa
+	* Tagging RunCom-00-00-45
+	
+	* Serialisation of persistent data into XML (rather than Java binary)
+	  Using XML serialisation library XStream http://xstream.codehaus.org
+	  RunCom-00-00-44 was using ObjectOutputStream/ObjectInputStream (binary
+	  data in files)
+	M src/runcom/activemqcommunication/broker/PersistentRepository.java
+	A lib/xpp3_min-1.1.4c.jar
+	A lib/xstream-1.3.1.jar
+	M ant/build.xml
+
+	* Minor, comments in the code modified, etc
+	M src/runcom/RunCom.java
+	M src/runcom/RequestPanelSupervisor.java
+	M src/runcom/ChatPanel.java
+
+	* Files TODO and README (containing all deployment instructions)
+	A TODO
+	A README
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-10-30 Zdenek Maxa
+	* Tagging RunCom-00-00-44
+
+	* Minor
+	M src/runcom/activemqcommunication/broker/PersistentRepository.java
+	M src/runcom/activemqcommunication/broker/Broker.java
+
+	* Constructor for *Message classes made empty, get/set methods always
+	  provided for instance attributes and some methods renaimed to comply
+	  with Bean nomenclature in order for XMLEncoder to be able serialize
+	  *Messages into XML and name attributes correctly (which depends on
+	  correct methods naming). However, XMLEncoder/Decoder for persistent
+	  data serialisation wasn't used after all - b/c of problem with reading
+	  XML file into which objects were appended (file closed between
+	  modifications)
+	M src/runcom/activemqcommunication/WhiteBoardMessage.java
+	M src/runcom/activemqcommunication/TextMessage.java
+	M src/runcom/activemqcommunication/Sender.java
+	M src/runcom/activemqcommunication/DeskDataMessage.java
+	M src/runcom/WhiteBoardWindow.java
+	M src/runcom/RunCom.java
+	M src/runcom/OverallPanel.java
+	M src/runcom/DeskPanelSupervisor.java
+	M src/runcom/DeskData.java
+	M src/runcom/DQStatusWatcher.java
+	M src/runcom/DQStatusCheckBoxListener.java
+	M src/runcom/ChatPanel.java
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-10-28 Zdenek Maxa
+	* Tagging RunCom-00-00-43
+
+	* Broker file persistent data storing implemented
+	A src/runcom/activemqcommunication/broker/PersistentRepository.java
+	M src/runcom/activemqcommunication/broker/Broker.java
+	M src/runcom/activemqcommunication/broker/BrokerReceiver.java
+	M RunCom_broker_service (broker command line arguments updated)
+	
+	* FD/Lumi renamed to FD-Lumi
+	M desks.txt
+	M runcom.sh
+
+	* Another try to fix problem when screen lock competes for focus with
+	  the NotificationDialog - now should remain to top but without focus
+	M src/runcom/NotificationDialog.java
+
+	* Minor
+	M src/runcom/activemqcommunication/Sender.java
+	M src/runcom/activemqcommunication/DeskDataMessage.java
+	M src/runcom/DeskData.java
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-10-17 Zdenek Maxa
+	* Tagging RunCom-00-00-42
+
+	* Different directory for last white board message
+	M src/runcom/activemqcommunication/broker/Broker.java
+
+	* Force predefined size (700x450) if white board message goes too wide
+	  (once the size is forced, automatic pack() never works even on short one
+	  line messages)
+	M src/runcom/WhiteBoardWindow.java
+
+	* Muon 1 system re-mapped to MDT subsystem
+	M runcom.sh 
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-10-15 Zdenek Maxa
+	* Tagging RunCom-00-00-41
+
+	* Last WhiteBoardMessage exported into text file by the broker
+	M src/runcom/activemqcommunication/broker/Broker.java
+
+	* WhiteBoardMessage not always on top, always decorated
+	M src/runcom/WhiteBoardWindow.java
+
+	* Muon1 system renamed to MDT, other three systems added
+	M desks.txt
+	M src/runcom/RunComGUI.java (window must be now larger)
+
+	* Don't re-set DQ checked status to false when it is already false
+	  (redistributing identical DeskDataMessage in vain)
+	M src/runcom/DQStatusWatcher.java
+
+	* More distinct colours
+	M src/runcom/ChatPanel.java
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-10-02 Zdenek Maxa
+	* Tagging RunCom-00-00-40
+
+	* Warning about focus changing added into notification dialog
+	M src/runcom/NotificationDialog.java
+
+	* WhiteBoard messaging functionality implemented
+	A src/runcom/WhiteBoardWindow.java
+	A src/runcom/activemqcommunication/WhiteBoardMessage.java
+	M src/runcom/RunCom.java
+	M src/runcom/RunComGUI.java
+	M src/runcom/activemqcommunication/Receiver.java
+	M src/runcom/activemqcommunication/Sender.java
+	M src/runcom/activemqcommunication/StartupSynchronizer.java
+	M src/runcom/activemqcommunication/broker/Broker.java
+	M src/runcom/activemqcommunication/broker/BrokerReceiver.java
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-09-13 Zdenek Maxa
+	* Tagging RunCom-00-00-39
+
+	* CheckList made singleton - so could pop-up more than one checklist
+          at a time
+	* DQStatusWatcher now checks only once during the DQ period of time
+	* DQ checklist poped-up automatically (with 1min delay) if system
+          went to ready and doesn't have DQ checked
+	* ChatPanel setting tooltip only to message which are meant to
+          acknowledge
+	M src/runcom/ChatPanel.java
+	M src/runcom/DQStatusWatcher.java
+ 	M src/runcom/RunCom.java
+
+	* Minor
+	M src/runcom/DeskData.java	
+
+	* DAQ -> DAQ-HLT renamed
+	M desks.txt 
+	M runcom.sh
+
+	* JAR build file updated
+    	M runcom.jar
+    	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-09-08 Zdenek Maxa
+	* Tagging RunCom-00-00-38
+
+	* Checklists renaming desk- to signin-, shifter- to DQcheck
+	* Problem with NotificationDialog, likely, fixed - NullPointerException
+	  if more then one was open
+	* Initial DQ time period put to 60min
+	* DQ checklists pops up automatically when system is in ready state
+	M desks.txt
+	M src/runcom/RunCom.java
+	M src/runcom/NotificationDialog.java
+	M src/runcom/DeskPanel.java
+	M src/runcom/DeskData.java (only a comment change)
+	M src/runcom/DQStatusWatcher.java
+
+	* JAR build file updated
+    	M runcom.jar
+    	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-09-04 Zdenek Maxa
+	* Tagging RunCom-00-00-37
+
+	* Implementing two other types of request - ready for stable beam and
+	  ready for config / start run. Corresponding request counters added.
+	  Requests are currently separated in the code, so some code duplication
+	  is there (RequestPanelSupervisor and two request related methods from
+	  the RunCom class). If more requests are implemented, then everything
+	  should be treated in arrays/containers
+	M RunCom.java 1.21
+	M RequestPanelSupervisor.java 1.4
+	M OverallPanel.java 1.9
+	M DeskData.java 1.11
+	M Sender.java 1.8
+	M RequestMessage.java 1.2
+	M DeskDataMessage.java 1.9
+
+	* Minor
+	M RunCom_broker_service
+
+	* JAR build file updated
+    M runcom.jar
+    M broker.jar
+	
+-----------------------------------------------------------------------------
+2008-09-01 Zdenek Maxa
+	* Tagging RunCom-00-00-36
+
+	* System accounts mapping modified
+	M runcom.sh
+
+-----------------------------------------------------------------------------
+2008-08-24 Zdenek Maxa
+	* Tagging RunCom-00-00-35
+
+	* Message panels made higher
+	M src/runcom/RunComGUI.java
+	M src/runcom/ChatPanel.java
+
+	* Flag added not to update request/fulfilled times until some request was
+	  really issued (otherwise all request counters at 0 would result into
+	  request fulfilled time set)
+	M src/runcom/RequestPanelSupervisor.java
+
+	* Minor (spinner values step and init made smaller)
+	M src/runcom/DeskPanel.java
+
+	* Ready state not checked anymore (can't set DQ checked if not in ready
+	  state anyway) - was a bug - DQ time wasn't checked if in the meantime a
+	  system went from ready to some other state
+	M src/runcom/DQStatusWatcher.java
+
+	* JAR build file updated
+    M runcom.jar
+
+-----------------------------------------------------------------------------
+2008-08-22 Zdenek Maxa
+	* Tagging RunCom-00-00-34
+
+	* Data and time labels added into request panel - time of request and when
+	  request was fulfilled
+	M src/runcom/RequestPanelSupervisor.java
+
+	* Crash (NullPointer), not wholly understood, some additional checks
+	M src/runcom/NotificationDialog.java
+
+	* HTL->Trigger renamed, new FD/Lumi desk added
+	M runcom.sh
+	M desks.txt
+
+	* JAR build file updated
+    M runcom.jar
+
+-----------------------------------------------------------------------------
+2008-08-21 Zdenek Maxa
+	* Tagging RunCom-00-00-33
+
+	* Requests send by supervisor implemented
+	  Request message
+	  Pending request counter within DeskData, counter shown in OverallPanel
+	  Request status on the request panel
+	  OveallPanel reference removed from DeskData, accessed via RunComGUI
+	A src/runcom/RequestPanelSupervisor.java
+	A src/runcom/activemqcommunication/RequestMessage.java
+	M src/runcom/activemqcommunication/Sender.java
+	M src/runcom/activemqcommunication/Receiver.java
+	M src/runcom/activemqcommunication/DeskDataMessage.java
+	M src/runcom/RunComGUI.java
+	M src/runcom/RunCom.java
+	M src/runcom/OverallPanel.java (pending requests added, some refactoring)
+	M src/runcom/DeskData.java
+	M src/runcom/DeskPanel.java
+
+	* Related to states (enabled/disabled) of status buttons
+	M src/runcom/IDeskPanel.java
+
+	* Can check data quality (DQ) only if in ready state
+	M src/runcom/DQStatusCheckBoxListener.java
+
+	* Minor
+	M blue_square_icon.gif
+	M green_tick_icon.gif
+	M grey_circle_icon.gif
+	M red_cross_icon.gif
+	M desks.txt
+	M src/runcom/DQStatusWatcher.java
+
+	* JAR build file updated
+    M runcom.jar
+    M broker.jar
+
+-----------------------------------------------------------------------------
+2008-08-19 Zdenek Maxa
+	* Tagging RunCom-00-00-32
+
+	* Icons files renamed, two new added, states represented by icons in the
+	  overall panel
+	R dq_checked_icon.gif
+	R dq_unchecked_icon.gif
+	A blue_square_icon.gif
+	A red_cross_icon.gif
+	A green_tick_icon.gif
+	A grey_circle_icon.gif
+	M src/runcom/OverallPanel.java
+
+	* Transition between states implemented via four buttons rather
+	  than by ComboBox, button listeners right in the DeskPanel class
+	* New states titles
+	* Definition between states also defined by buttons being disabled, resp.
+	  enabled as desired
+	R src/runcom/ComboBoxListener.java
+	M src/runcom/RunComGUI.java
+	M src/runcom/IDeskPanel.java (some methods removed)
+	M src/runcom/DeskPanel.java
+	M src/runcom/DeskData.java
+
+	* Don't check DQ unless in ready state, pop up DQ checklist automatically
+	  when the time elapses
+	M src/runcom/DQStatusWatcher.java,
+
+	* Authentication now aware of the state into which is changing, pops up
+	  desk checklist if assigning new shifter and having system in ready state
+	M src/runcom/AuthenticationDialog.java
+
+	* Minor
+	M src/runcom/activemqcommunication/Sender.java
+	M src/runcom/RunCom.java
+	M src/runcom/NotificationDialog.java
+
+	* Use latest link at P1 filesystem pointing to the production TDAQ release
+	M runcom.sh
+	M broker.sh
+
+	* Show username if observer writes messages
+	M src/runcom/ChatPanel.java
+
+-----------------------------------------------------------------------------
+2008-08-05 Zdenek Maxa
+	* Tagging RunCom-00-00-31
+
+	* Minor / removing commented out code / adding comments
+	M RunComGUI.java 1.17
+	M NotificationDialog.java 1.4
+	M DeskPanel.java 1.11
+
+-----------------------------------------------------------------------------
+2008-08-01 Zdenek Maxa
+	* Tagging RunCom-00-00-30
+
+	* Single notification dialog, blinking via a timer, dialog create via
+	  event dispatching thread
+	M src/runcom/NotificationDialog.java
+
+	* JAR build file updated
+    M runcom.jar
+    M broker.jar
+
+-----------------------------------------------------------------------------
+2008-08-01 Zdenek Maxa
+	* Tagging RunCom-00-00-29
+	
+	* Notification dialog
+          - tried to issues a dialog for each configuration in a multi
+            desktop, multi screen setup (ACR) - doesn't work properly
+          - tried timer and blinking dialog - updating the JDialog
+            doesn't work in ACR ...
+	M src/runcom/NotificationDialog.java
+
+	* JAR build file updated
+    M runcom.jar
+    M broker.jar
+
+-----------------------------------------------------------------------------
+2008-07-31 Zdenek Maxa
+	* Tagging RunCom-00-00-28
+
+	* Possible to run Shift Leader desk and supervisor mode - quite a few
+          changes required since not foreseen. Plain supervisor mode - without
+          any desk assigned is also possible.
+	M ChatPanel.java 1.11
+	M RunCom.java 1.18
+	M RunComGUI.java 1.16
+
+	* New notification dialog started, now just skeleton class
+	A src/runcom/NotificationDialog.java        
+
+	* Minor
+	M runcom.sh 1.7
+	M desks.txt 1.4
+	M Broker.java 1.11
+	M Receiver.java 1.11
+	M AuthenticationDialog.java 1.7
+	M DeskData.java 1.8
+
+	* Bug fix - DQ last checked time updated only if checkbox is ticked
+	M DeskPanelSupervisor.java
+
+	* JAR build file updated
+        M runcom.jar
+        M broker.jar
+
+-----------------------------------------------------------------------------
+2008-07-30 Zdenek Maxa
+	* Tagging RunCom-00-00-27
+	
+	* Increase initial width a bit, set background color of the message
+          notification dialog doesn't stay on ACR machine ...
+	M RunComGUI.java
+	M RunCom.java	
+
+        * JAR build file updated
+        M runcom.jar
+
+-----------------------------------------------------------------------------
+2008-07-30 Zdenek Maxa
+	* Tagging RunCom-00-00-26
+
+	* Minor
+	M AuthenticationDialog.java
+	M OverallPanel.java
+	
+	* Table selection colours set explicitly
+	M ChatPanel.java
+	
+	* Acknowledge message pop-up notification dialog made more aggressive
+	M RunCom.java
+
+	* All fields made private now, initial window GUI size adjusted
+	M RunComGUI.java
+
+        * JAR build file updated
+        M runcom.jar
+
+-----------------------------------------------------------------------------
+2008-07-30 Zdenek Maxa
+	* Tagging RunCom-00-00-25
+	
+	* Message acknowledgement mechanism - listener at the JTable, checks
+          for right clicks on messages intended for acknowledgement and
+          displays pop-up context menu. DeskData has number of non-acknowledged
+          messages counter.
+	M ChatPanel.java 1.9
+	M RunComGUI.java 1.13
+	
+	* Minor
+	M Receiver.java 1.10
+
+	* SerialIDs added
+	M TextMessage.java 1.4
+	M DeskDataMessage.java 1.7
+	
+        * JAR build file updated
+        M runcom.jar
+        M broker.jar
+
+-----------------------------------------------------------------------------
+2008-07-29 Zdenek Maxa
+	* Tagging RunCom-00-00-24
+
+	* Table row selection started
+	M ChatPanel.java
+
+	* All desk states visible, some transitions not allowed
+	M ComboBoxListener.java
+	M DeskData.java
+	M DeskPanel.java
+	M IDeskPanel.java
+
+	* Display a pop-up dialog when a text message requiring
+          acknowledgement arrives (not during start-up)
+	M RunCom.java
+
+-----------------------------------------------------------------------------
+2008-07-29 Zdenek Maxa
+	* Tagging RunCom-00-00-23
+
+	* Acknowlegement flag processed with received text message
+	M DQStatusWatcher.java 1.2
+
+	* Minor
+	M BrokerReceiver.java 1.5
+	M Broker.java 1.10
+
+	* Acknowlegement flag added and timestamp of a text message.
+	TextMessage.java 1.3
+
+	* Acknowlegement flag added / taken into account
+	M Sender.java 1.5
+	M Receiver.java 1.9
+	M StartupSynchronizer.java 1.4
+
+	* Message acknowlegement counter added
+	M DeskDataMessage.java 1.6
+
+	* Reset counter of messages awaiting acknowledgement at start-up.
+	M RunComGUI.java 1.12
+
+	* Here is ackFlag of an incoming text message processed, also update
+          of OverallPanel from here
+	M RunCom.java 1.14
+
+	* Completely different design of the panel, icons for DQ status, 
+          not acknowledged message counter (another columns for desks)
+	M OverallPanel.java 1.5
+	A dq_checked_icon.gif
+	A dq_unchecked_icon.gif
+
+	* Acknowlegement counter displayed on desk panel
+	M DeskPanel.java 1.9
+	M IDeskPanel.java 1.5
+
+	* Acknowlegement flag added into DeskData, overall panel not updated
+          from this class
+	M DeskData.java 1.6
+
+	* Acknowlegement flag processed with received text message
+	M ChatPanel.java 1.7
+	
+        * JAR build file updated
+        M runcom.jar
+        M broker.jar
+
+-----------------------------------------------------------------------------
+2008-07-28 Zdenek Maxa
+	* Tagging RunCom-00-00-22
+
+	* Minor
+	M BrokerReceiver.java
+	M Broker.java
+	M Receiver.java
+	M RunCom.java
+	M DeskPanelSupervisor.java
+
+	* DeskMessage has a timestamp when it was sent
+	M DeskDataMessage.java 
+
+	* ChatPanel now uses JTable for displaying incoming messages.
+          Automatic scrolling to the bottom not completely reliable. Checks
+          of message size and number of messages in the container added.
+	M ChatPanel.java 
+
+	* Hide the password text field for now (it is confusing when unused)
+	M AuthenticationDialog.java	
+
+	* Assigned user name not editable
+	M DeskPanel.java
+
+        * JAR build file updated
+        M runcom.jar
+        M broker.jar
+
+-----------------------------------------------------------------------------
+2008-07-26 Zdenek Maxa
+	* Tagging RunCom-00-00-21
+
+	* Received messages now in JTable, model, cell renderer implemented,
+          also font size changing
+	M ChatPanel.java 1.5
+
+-----------------------------------------------------------------------------
+2008-07-24 Zdenek Maxa
+	* Tagging RunCom-00-00-20
+
+	* Data time format changed, minor
+	M TextMessage.java 1.2
+
+	* Minor
+	M AuthenticationDialog.java 1.4
+
+	* Font size possible to change
+	M ChatPanel.java 1.4
+
+	* RunComGUISupervisor class removed (and its interface)
+	M RunComGUI.java 1.11
+	M RunCom.java
+	R RunComGUISupervisor.java
+	R IRunComGUI.java
+
+        * JAR build file updated
+        M runcom.jar
+        M broker.jar
+
+-----------------------------------------------------------------------------
+2008-07-21 Zdenek Maxa
+        * Tagging RunCom-00-00-19
+
+        * Writing messages allowed for observer mode
+        M src/runcom/ChatPanel.java
+
+        * JAR build file updated
+        M runcom.jar
+        M broker.jar
+
+-----------------------------------------------------------------------------
+2008-07-21 Zdenek Maxa
+	* Tagging RunCom-00-00-18
+
+	* Minor (adding suppress warning statements, etc)
+	M src/runcom/activemqcommunication/Receiver.java
+	M src/runcom/RunComGUISupervisor.java
+	M src/runcom/RunComGUI.java
+	M src/runcom/RunComException.java
+	M src/runcom/DQStatusCheckBoxListener.java
+	M src/runcom/AuthenticationDialog.java
+
+-----------------------------------------------------------------------------
+2008-07-18 Zdenek Maxa
+	* Tagging RunCom-00-00-17
+
+	* Incoming messages shown for observer, bug fixed here (crashing on
+	  incoming message as before chatPanel was not defined at all)
+	M src/runcom/RunComGUI.java
+	M src/runcom/ChatPanel.java
+
+	* crhlt -> crtrig
+	M runcom.sh
+
+	* Minor
+	M src/runcom/activemqcommunication/broker/Broker.java
+	M src/runcom/DeskPanel.java
+	
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-07-18 Zdenek Maxa
+	* Tagging RunCom-00-00-16
+
+	* Added GUI dialog to notify what the Broker is down during session
+	  (onException method is called in the Receiver)
+	M src/runcom/activemqcommunication/Receiver.java
+	M activemqcommunication/StartupSynchronizer.java
+
+	* TDAQ sysadmins start / stop service added
+	A RunCom_broker_service
+	
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-07-18 Zdenek Maxa
+	* Tagging RunCom-00-00-15
+
+	* JAR build files remove and re-added again
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-07-18 Zdenek Maxa
+	* Tagging RunCom-00-00-14
+
+	* Chat, message exchange feature. Message is displayed in the senders
+          instance after it is received from broker.
+	  Broker holds all message history and sends everything upon start-up
+          synchronization request.
+	M src/runcom/activemqcommunication/broker/Broker.java
+	M src/runcom/activemqcommunication/broker/BrokerReceiver.java
+	M src/runcom/activemqcommunication/StartupSynchronizer.java
+	M src/runcom/activemqcommunication/Sender.java
+	M src/runcom/activemqcommunication/Receiver.java
+	A src/runcom/activemqcommunication/TextMessage.java
+	A src/runcom/ChatPanel.java
+	M src/runcom/RunComGUISupervisor.java
+	M src/runcom/RunComGUI.java
+	M src/runcom/RunCom.java
+	M src/runcom/OverallPanel.java
+	M src/runcom/IRunComGUI.java
+	M ant/build.xml
+
+	* Minor
+        M src/runcom/DeskPanel.java
+	M src/runcom/DeskData.java
+	M runcom.sh 
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-07-15 Zdenek Maxa
+	* Tagging RunCom-00-00-13
+
+	* Another try when deleting temporary broker's data directory
+	M src/runcom/activemqcommunication/broker/Broker.java
+
+	* Select Overall panel in the observer mode
+	M src/runcom/RunComGUI.java
+
+-----------------------------------------------------------------------------
+2008-07-14 Zdenek Maxa
+	* Tagging RunCom-00-00-12
+
+	* DQ time when it was ticked as true saved when done by supervisor
+	M src/runcom/DeskPanelSupervisor.java 
+
+	* Synchronization message logging revisited
+	M src/runcom/RunCom.java
+	M src/runcom/activemqcommunication/DeskDataMessage.java
+	M src/runcom/activemqcommunication/Receiver.java
+	M src/runcom/activemqcommunication/broker/Broker.java
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-07-14 Zdenek Maxa
+	* Tagging RunCom-00-00-11
+
+	* Minor start script changes
+	M runcom.sh
+	M broker.sh
+
+-----------------------------------------------------------------------------
+2008-07-11 Zdenek Maxa
+	* Tagging RunCom-00-00-10
+
+	* Mapping ACR desk unix account names to desk names for RunCom purposes
+	M desks.txt
+	M runcom.sh
+
+-----------------------------------------------------------------------------
+2008-07-05 Zdenek Maxa
+	* Tagging RunCom-00-00-09
+
+	* DQ checking (time, status, DQ check period) functionality
+        * Overall panel visible for all subsystems as well
+	M src/runcom/activemqcommunication/Sender.java
+	M src/runcom/activemqcommunication/DeskDataMessage.java
+	M src/runcom/RunComGUI.java
+	M src/runcom/OverallPanel.java
+	M src/runcom/IDeskPanel.java
+	M src/runcom/DeskData.java
+	M src/runcom/DeskPanel.java
+	M src/runcom/DeskPanelSupervisor.java  
+	A src/runcom/DQStatusCheckBoxListener.java
+	A src/runcom/DQStatusWatcher.java
+
+	* Calls from CheckList to RunCom implemented - now also when DQ
+          status is checked
+	* Bug fixed - propagation of command line parameters consisting
+          of more words didn't work properly (e.g. "Run Control"), should
+          be fixed now
+	M src/runcom/RunCom.java
+
+	* Added other exception catching at Broker, more robust now
+	M src/runcom/activemqcommunication/broker/Broker.java
+	M src/runcom/activemqcommunication/broker/BrokerReceiver.java
+
+	* New order of desks
+	M desks.txt
+
+	* Minor 
+	M src/runcom/activemqcommunication/Receiver.java
+	M src/runcom/RunComGUISupervisor.java
+	M src/runcom/ComboBoxListener.java 
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-07-03 Zdenek Maxa
+	* Tagging RunCom-00-00-08
+
+	* Log when status is changed on DeskPanel
+	M src/runcom/DeskPanel.java
+	M src/runcom/ComboBoxListener.java
+
+	* Appropriate exception reaction - class version incompatibility
+ 	  (java compiler incompatible builds)
+	M src/runcom/CheckListCaller.java
+
+	* Minor
+	M src/runcom/activemqcommunication/broker/Broker.java
+	M src/runcom/RunComGUISupervisor.java
+	M src/runcom/RunCom.java
+	M src/runcom/OverallPanel.java
+
+	* JAR build file updated
+	M runcom.jar
+
+-----------------------------------------------------------------------------
+2008-07-03 Zdenek Maxa
+	* Tagging RunCom-00-00-07
+
+	* RunCom start up synchronization bug fixed (references to RunCom.gui
+          before it was properly initialized and registered with RunCom
+ 	  by the GUI initialization thread.
+	M src/runcom/RunComGUISupervisor.java
+ 	M src/runcom/RunComGUI.java
+	M src/runcom/RunCom.java
+	
+	* JAR build file updated
+	M runcom.jar
+
+-----------------------------------------------------------------------------
+2008-07-02 Zdenek Maxa
+	* Tagging RunCom-00-00-06
+
+	* Message repository implemented at Broker's side, listens for all
+          messages and stores them locally (at the moment no persistification
+          is done) and replies to update requests of the starting up RunCom
+          instances to synchronize states, BrokerReceiver has got all
+          listening / replying functionality
+	* Broker has got command line parameters implemented and uses
+          customised logger (mylogger)
+	A src/runcom/activemqcommunication/broker/BrokerReceiver.java
+	A src/runcom/activemqcommunication/StartupSynchronizer.java
+	M src/runcom/activemqcommunication/broker/Broker.java
+	M src/runcom/RunCom.java
+	M ant/build.xml (Broker must have class access to DeskDataMessage)
+	M broker.sh
+
+
+	* Bug fix - when setting error, ready, assigned states, the combo box
+          must contain the appropriate items, revealed when updating states
+          automatically during start-up (synchronizing with state / message
+          repository)
+        M src/runcom/IDeskPanel.java
+	M src/runcom/DeskData.java
+	M src/runcom/DeskPanel.java 
+
+	* DeskHashMap removed from supervisor GUI since it inherits from basic
+          (all the same, but supervisor uses this attribute from its master
+          class)
+	M src/runcom/RunComGUI.java
+	M src/runcom/RunComGUISupervisor.java 
+	
+	* Minor
+	M src/runcom/activemqcommunication/Sender.java
+	M src/runcom/activemqcommunication/Receiver.java
+	M src/runcom/activemqcommunication/DeskDataMessage.java
+
+	* JAR build file updated
+	M runcom.jar
+	M broker.jar
+
+-----------------------------------------------------------------------------
+2008-06-19 Zdenek Maxa
+	* Tagging RunCom-00-00-05
+
+	* Broker made a well-behaved deamon, clean-up of tmp / persistent data
+	  directory done when shutting down Broker's JVM (Shutdown hook)
+	R src/runcom/activemqcommunication/Broker.java
+	A src/runcom/activemqcommunication/broker/Broker.java
+	M ant/build.xml
+	M broker.jar
+
+	* Minor
+	M src/runcom/RunCom.java
+
+	* JAR build file updated
+	M runcom.jar
+	
+-----------------------------------------------------------------------------
+2008-05-21 Zdenek Maxa
+	* Tagging RunCom-00-00-04
+
+	* Message exchange transport implemented via Apache ActiveMQ which is
+	  implementation of Sun's Java 2 Enterprise Edition JMS (Java Message
+	  Service) specification. There is currently no message persistency
+	  repository yet implemented.
+	  Message sender and receiver are implemented.
+	  Network name of the message Broker must currently be specified as a
+	  command line argument to RunCom.
+	A lib/activemq-all-5.1.0.jar (Apache ActiveMQ library)
+	A src/runcom/activemqcommunication/Broker.java
+	A src/runcom/activemqcommunication/DeskDataMessage.java
+	A src/runcom/activemqcommunication/Receiver.java
+	A src/runcom/activemqcommunication/Sender.java
+	A broker.jar (message broker build file)
+	A broker.sh (message broker start script)
+	M ant/build.xml (new target broker to compile and build message broker)
+	M src/runcom/DeskData.java
+	M src/runcom/ComboBoxListener.java
+	M src/runcom/RunComGUISupervisor.java
+	M src/runcom/RunComGUI.java
+	M src/runcom/RunCom.java
+
+	* Bug of action event handling on status combo box fixed
+	M src/runcom/DeskPanel.java
+
+	* Minor
+	M src/runcom/IDeskPanel.java
+	M src/runcom/IRunComGUI.java
+	M src/runcom/AuthenticationDialog.java
+
+	* JAR build file updated
+	M runcom.jar
+
+-----------------------------------------------------------------------------
+2008-05-14 Zdenek Maxa
+	* Tagging RunCom-00-00-03
+
+	* New files added. Except for TDAQ/IS repository interaction (publish,
+	  receive status desk updates). The functionalty of RunCom is now
+	  equivalent or enhanced to the last production version of Dusan's RunSync
+	A src/runcom/AuthenticationDialog.java
+	A src/runcom/ComboBoxListener.java
+	A src/runcom/DeskData.java
+	A src/runcom/DeskPanel.java
+	A src/runcom/DeskPanelSupervisor.java
+	A src/runcom/IDeskPanel.java
+	A src/runcom/IRunComGUI.java
+	A src/runcom/OverallPanel.java
+	A src/runcom/RunComGUISupervisor.java
+
+
+	* Modes supervisor, observer and desk-specific implemented. Method exposed
+	  for CheckList, etc, etc, a lot of new other stuff ...
+	M src/runcom/RunCom.java
+	M src/runcom/RunComGUI.java
+
+	* Minor
+	M src/runcom/CheckListCaller.java
+
+	* Minor
+	M runcom.sh
+	M lib/mylogger.jar
+
+	* JAR build file updated
+	M runcom.jar
+
+-----------------------------------------------------------------------------
+2008-05-02 Zdenek Maxa
+	* Tagging RunCom-00-00-02
+
+-----------------------------------------------------------------------------
+2008-05-02 Zdenek Maxa
+	* Tagging RunCom-00-00-01
+
+	* Importing first iteration of new RunCom (start of RunSync redesign)
+	  under atdaqcvs repository under /common/RunCom
+	
+	* ANT build file (for local usage)
+	A ant/build.xml
+
+	* Libraries
+	A lib/commons-cli-1.0.jar Apache Jakarta utils (e.g. command line parsing)
+	A lib/log4j-1.2.15.jar Apache advanced logging facility
+	A lib/mylogger.jar Customised logging library build upon Apache log4j
+
+	* RunCom source codes under src directory
+
+	* Local build binary JAR file to run via start script
+	A runcom.jar
+	A runcom.sh
+
+	* Desks names definition
+	A desks.txt
+
+-----------------------------------------------------------------------------

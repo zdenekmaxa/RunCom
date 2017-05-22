@@ -1,0 +1,161 @@
+#!/bin/bash
+#
+# Start script for RunCom broker service
+# by TDAQ sysadmins
+
+# chkconfig: - 99 01
+# description: Starts and stops the RunCom broker daemon
+
+# Source function library.
+if [ -f /etc/init.d/functions ] ; then
+    . /etc/init.d/functions
+elif [ -f /etc/rc.d/init.d/functions ] ; then
+    . /etc/rc.d/init.d/functions
+else
+    echo "Could not find /etc/init.d/functions or /etc/rc.d/init.d/functions."
+    exit 0
+fi
+
+# put some colors
+declare resetCol="\033[0m"
+declare textRed="\033[31m"
+declare textGreen="\033[32m"
+
+# Avoid using root's TMPDIR
+unset TMPDIR
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+if [ ${NETWORKING} = "no" ] ; then
+    echo "The networking is not enabled."
+    exit 0
+fi
+
+declare runComBrokerScript="/sw/ACR/RunCom/broker.sh --debug DEBUG --whiteboard /det/tdaq/RunComWhiteBoard --persistent /var/lib/RunComBroker"
+declare runComBrokerStdout=/var/log/RunComBrokerStdout.log
+declare runComBrokerStderr=/var/log/RunComBrokerStderr.log
+declare runComBrokerPidFile=/var/run/RunComBroker.pid
+declare -i retVal=0
+declare pidOfLastJob
+declare pidOfRunningProcess
+
+checkIfRunning () {
+    pidOfLastJob=`cat ${runComBrokerPidFile} 2> /dev/null`
+    pidOfRunningProcess=`ps auxwww | grep -v -E '(grep|awk)' | awk '/java.*broker.*/ {print $2}'`
+    if [[ -z ${pidOfLastJob} && -z ${pidOfRunningProcess} ]] ; then
+	# RunCom broker is stopped.
+	retVal=1
+    elif [[ -n ${pidOfLastJob} && -z ${pidOfRunningProcess} ]] ; then
+	# RunCom broker is dead but the PID file exists.
+	retVal=2
+    elif [[ -z ${pidOfLastJob} && -n ${pidOfRunningProcess} ]] ; then
+	# RunCom broker (${pidOfRunningProcess}) is running but it was not launched with this script.
+	retVal=3
+    elif [[ $pidOfLastJob == $pidOfRunningProcess ]] ; then
+	# RunCom broker (${pidOfLastJob}) is running...
+	retVal=0
+    else
+	# RunCom broker (${pidOfRunningProcess}) is running but it was not launched with this script: PID in file -> ${pidOfLastJob}; PID in memory -> ${pidOfRunningProcess}.
+	retVal=4
+    fi
+}
+
+start() {
+    checkIfRunning
+    if (( retVal == 3 || retVal == 0 || retVal == 4 )) ; then
+	echo -e "${textRed}The RunCom broker service is running.${resetCol}\nCheck the following list for processes:${textGreen}"
+	ps auxwww | grep -v grep | grep -E 'java.*broker.*'
+	echo -e "${resetCol}End of the list.\nIf the list is empty, remove ${runComBrokerPidFile} and restart the service."
+    else
+	echo -n "Starting the RunCom broker daemon: "
+	${runComBrokerScript} > ${runComBrokerStdout} 2> ${runComBrokerStderr} &
+	retVal=$?
+	pidOfLastJob=$!
+	if [ $retVal -eq 0 ] ; then
+	    echo_success
+	    echo $pidOfLastJob > ${runComBrokerPidFile}
+	else
+	    echo_failure
+	fi
+	echo
+    fi
+    return $retVal
+}
+
+stop() {
+    checkIfRunning
+    echo -n "Stopping the RunCom broker daemon: "
+    if (( retVal == 3 || retVal == 0 || retVal == 4 )) ; then
+	kill -15 ${pidOfRunningProcess}
+	retVal=$?
+    fi
+    rm -f ${runComBrokerPidFile}
+    if [ $retVal -eq 0 ] ; then
+	echo_success
+    else
+	echo_failure
+    fi
+    echo
+    return $retVal
+}
+
+rhstatus() {
+    checkIfRunning
+    case $retVal in
+	0)
+	    echo "RunCom broker (${pidOfLastJob}) is running..."
+	    ;;
+	1)
+	    echo "RunCom broker is stopped."
+	    ;;
+	2)
+	    echo "RunCom broker is dead but the PID file exists."
+	    ;;
+	3)
+	    echo "RunCom broker (${pidOfRunningProcess}) is running but it was not launched with this script."
+	    ;;
+	4)
+	    echo "RunCom broker (${pidOfRunningProcess}) is running but it was not launched with this script: PID in file -> ${pidOfLastJob}; PID in memory -> ${pidOfRunningProcess}."
+	    ;;
+    esac
+    return $retVal
+}
+
+srvreset() {
+    echo -e "Removing ${runComBrokerPidFile}..."
+    rm -fv ${runComBrokerPidFile}
+}
+
+restart() {
+    stop
+    start
+}
+
+
+# Allow status as non-root.
+if [ "$1" = status ]; then
+    rhstatus
+    exit $?
+fi
+
+case "$1" in
+    start)
+  	start
+	;;
+    stop)
+  	stop
+	;;
+    restart)
+  	restart
+	;;
+    reset)
+	srvreset
+	;;
+    *)
+	echo $"Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?

@@ -1,0 +1,46 @@
+RunCom application, TODO list
+
+
+00 Overview tabpane should be JTable to guarantee same heights 
+    of all rows. With various fonts on different machines, it is impossible
+    to rely on certain fixed height
+
+01 JUnit tests
+
+02 RunCom.getGUI().getDeskData(deskName) is not ideal, getting
+    desk data should not go via GUI - to refactor
+
+03 RunCom Broker - could potentially be contacted without having to specify
+    host name of the machine where the Broker runs - via multicast discovery
+    of the activeMQ library. However, multicasts are not routed on P1 network,
+    so this is not a real TODO item, more a suggestion for an experiment ...
+
+04 If RunCom instance detects loss of connection to Broker, it may, after
+    some interval, try to re-establish the connection to Broker by itself
+    (without having to restart the RunCom instance as it is at the moment)
+    see Receiver.onException() method
+
+05 Create RunCom task panel icon
+
+06 RunCom ChatPanel - table doesn't always scroll right to the bottom
+    (sometimes half a line not visible), see the method:
+    ChatPanel.setScrollBarToBottom()
+
+07 Caution, situation: None of the systems is ready. There is an request but
+    gets dropped since no-one is -ready- to response. Then some system goes
+    -ready-. After this, the request indicator turns fulfilled and ticked.
+    Both criteria for a ticked request are met: 1) all pending requests
+    counters are (still) 0 and 2) RequestSubPanel.RequestSubPanel (in the
+    class RequestPanelSupervisor) is now true (meaning there was a request
+    of such type). Should be seen in production if this behaviour is actually
+    a problem or, more precisely, if it causes any confusion
+    
+08 When having many TextMessages - all text messages are sent on a RunCom
+    instance startup when synchronising. Timeout for receive operation is
+    currently set to 6 seconds - observe output log should this operation
+    time out (method StartupSynchronizer.synchronize())
+
+09 If there are new types of requests to be added, then requests
+    implementation should be made more uniform, otherwise already quite
+    duplicated code somewhere would grow more (feature started as one type of
+    request, then another was added, then another ...)
